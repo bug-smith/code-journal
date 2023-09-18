@@ -24,17 +24,21 @@
     <main class="container">
       <div data-view="entry-form">
         <form>
-          <div class="row">
+          <div class="row" id="r1">
             <h2 class="column-full">New Entry</h2>
           </div>
-          <div class="row">
+          <div class="row" id="r2">
             <div class="column-half column-full">
               <img src="images/placeholder-image-square.jpg" />
             </div>
             <div class="column-half">
-              <label for="title" class="column-full">Title</label>
+              <label for="title" class="column-full" id="title-label"
+                >Title</label
+              >
               <input type="text" id="title" name="title" class="column-full" />
-              <label for="photo-url" class="column-full">Photo URL</label>
+              <label for="photo-url" class="column-full" id="photourl-label"
+                >Photo URL</label
+              >
               <input
                 type="text"
                 id="photo-url"
@@ -42,7 +46,7 @@
                 class="column-full" />
             </div>
           </div>
-          <div class="row">
+          <div class="row" id="r3">
             <div class="column-full">
               <label for="notes" class="column-full">Notes</label>
               <textarea
@@ -53,9 +57,9 @@
                 class="column-full"></textarea>
             </div>
           </div>
-          <div class="row">
+          <div class="row" id="r4">
             <div class="column-full">
-              <button type="submit" class="btn">SAVE</button>
+              <button type="submit" class="save-btn">SAVE</button>
             </div>
           </div>
         </form>
