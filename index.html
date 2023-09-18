@@ -29,13 +29,18 @@
           </div>
           <div class="row" id="r2">
             <div class="column-half column-full">
-              <img src="images/placeholder-image-square.jpg" />
+              <img src="images/placeholder-image-square.jpg" class="img" />
             </div>
             <div class="column-half">
               <label for="title" class="column-full" id="title-label"
                 >Title</label
               >
-              <input type="text" id="title" name="title" class="column-full" />
+              <input
+                type="text"
+                id="title"
+                name="title"
+                class="column-full"
+                required />
               <label for="photo-url" class="column-full" id="photourl-label"
                 >Photo URL</label
               >
@@ -43,7 +48,8 @@
                 type="text"
                 id="photo-url"
                 name="photo-url"
-                class="column-full" />
+                class="column-full"
+                required />
             </div>
           </div>
           <div class="row" id="r3">
@@ -54,7 +60,8 @@
                 name="notes"
                 rows="4"
                 cols="1"
-                class="column-full"></textarea>
+                class="column-full"
+                required></textarea>
             </div>
           </div>
           <div class="row" id="r4">
