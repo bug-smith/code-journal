@@ -12,12 +12,14 @@ $form.addEventListener('submit', function (event) {
     title: $form.elements.title.value,
     url: $form.elements.photourl.value,
     notes: $form.elements.notes.value,
+    entryId: data.nextEntryId,
   };
 
-  obj.entryID = data.nextEntryId;
-  // nextEntryId++
+  data.entries.unshift(obj);
 
-  for (let i = 0; i < data.length; i++) {
-    data.entries = obj.push(obj[i]);
-  }
+  $photo.setAttribute('src', 'images/placeholder-image-square.jpg');
+
+  data.nextEntryId++;
+
+  $form.reset();
 });

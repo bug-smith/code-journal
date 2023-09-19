@@ -26,6 +26,7 @@ img {
   position: relative;
   margin-top: 10px;
   margin-bottom: 10px;
+  border-radius: 5px;
 }
 
 #r3 {
@@ -43,4 +44,9 @@ img {
   color: white;
   border-radius: 5px;
   height: 30px;
+}
+
+textarea {
+  border-radius: 5px;
+  margin-top: 1.3rem;
 }
