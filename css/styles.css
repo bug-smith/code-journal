@@ -2,7 +2,7 @@ header {
   background-color: #4c2676;
   color: white;
   width: 100%;
-  padding: 10px;
+  padding: 1%;
 }
 
 main {
@@ -49,8 +49,9 @@ img {
 textarea {
   border-radius: 5px;
   margin-top: 1.3rem;
+  width: 100%;
 }
 
-* {
-  box-sizing: border;
+input {
+  width: 100%;
 }
