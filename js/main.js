@@ -7,7 +7,11 @@ const $entries = document.querySelector("[data-view='entries']");
 const $noEntries = document.querySelector('.p1');
 const $ul = document.querySelector('ul');
 const $newBTN = document.querySelector('.new-btn');
-
+const $img = document.querySelector('.img');
+const $titleInput = document.querySelector('#title');
+const $photoUrlLabel = document.querySelector('#photo-url');
+const $notes = document.querySelector('#notes');
+const $h2 = document.querySelector('h2');
 // assigns image URL to produce the IMAGE
 
 // update for pull request
@@ -19,7 +23,6 @@ $photoURL.addEventListener('input', function (event) {
 // assigns entry to new obj stored in data
 
 $form.addEventListener('submit', function (event) {
-  event.preventDefault();
   const obj = {
     title: $form.elements.title.value,
     url: $form.elements.photourl.value,
@@ -27,21 +30,27 @@ $form.addEventListener('submit', function (event) {
     entryId: data.nextEntryId,
   };
 
-  data.entries.unshift(obj);
+  if (data.editing === null) {
+    event.preventDefault();
 
-  $photo.setAttribute('src', 'images/placeholder-image-square.jpg');
+    data.entries.unshift(obj);
 
-  data.nextEntryId++;
+    $photo.setAttribute('src', 'images/placeholder-image-square.jpg');
 
-  $form.reset();
+    data.nextEntryId++;
 
-  const $newDOM = renderEntry(obj);
+    $form.reset();
 
-  $ul.prepend($newDOM);
+    const $newDOM = renderEntry(obj);
 
-  viewSwap('entries');
+    $ul.prepend($newDOM);
 
-  toggleNoEntrires();
+    viewSwap('entries');
+
+    toggleNoEntrires();
+  } else {
+    obj.entryId = data.editing.entryId;
+  }
 });
 
 // assigns DOM tree
@@ -59,6 +68,7 @@ function renderEntry(entry) {
 
   const $li = document.createElement('li');
   $li.setAttribute('class', 'row');
+  $li.setAttribute('data-entry-id', entry.entryId);
 
   const $divHalfOne = document.createElement('div');
   $divHalfOne.setAttribute('class', 'column-half');
@@ -76,9 +86,13 @@ function renderEntry(entry) {
   const $p = document.createElement('p');
   $p.textContent += entry.notes;
 
+  const $iPencil = document.createElement('i');
+  $iPencil.setAttribute('class', 'fas fa-pencil');
+
   $li.append($divHalfOne, $divHalfTwo);
   $divHalfOne.append($img);
   $divHalfTwo.append($h4, $p);
+  $h4.append($iPencil);
 
   return $li;
 }
@@ -121,4 +135,25 @@ $a.addEventListener('click', function (event) {
 
 $newBTN.addEventListener('click', function (event) {
   viewSwap('entry-form');
+});
+
+$ul.addEventListener('click', function (event) {
+  if (event.target.closest('i')) {
+    viewSwap('entry-form');
+  }
+
+  const $number = Number(
+    event.target.closest('li').getAttribute('data-entry-id')
+  );
+
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === $number) {
+      data.editing = data.entries[i];
+    }
+  }
+  $img.setAttribute('src', data.editing.url);
+  $titleInput.setAttribute('value', data.editing.title);
+  $photoUrlLabel.setAttribute('value', data.editing.url);
+  $notes.textContent = data.editing.notes;
+  $h2.textContent = 'Edit Entry';
 });
