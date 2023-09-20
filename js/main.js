@@ -2,6 +2,8 @@ const $photoURL = document.querySelector('#photo-url');
 const $photo = document.querySelector('.img');
 const $form = document.querySelector('form');
 
+// update for pull request
+
 $photoURL.addEventListener('input', function (event) {
   $photo.setAttribute('src', event.target.value);
 });
