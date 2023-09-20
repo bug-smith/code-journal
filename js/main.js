@@ -48,8 +48,15 @@ $form.addEventListener('submit', function (event) {
     viewSwap('entries');
 
     toggleNoEntrires();
-  } else {
+  } else if (data.editing !== null) {
     obj.entryId = data.editing.entryId;
+
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === data.editing[i].entryId) {
+        data.entries[i] = data.editing[i];
+      }
+    }
+    renderEntry(obj);
   }
 });
 
