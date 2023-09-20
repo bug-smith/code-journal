@@ -7,6 +7,7 @@ header {
 
 main {
   display: flex;
+  flex-direction: column;
 }
 
 .entry-form {
@@ -16,7 +17,6 @@ main {
 
 img {
   width: 100%;
-  height: 100%;
 }
 
 #title,
@@ -54,4 +54,37 @@ textarea {
 
 input {
   width: 100%;
+}
+
+ul {
+  list-style: none;
+  padding-inline-start: 0;
+  position: relative;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-btn {
+  display: flex;
+  width: 60px;
+  height: 27px;
+  background-color: rgb(76, 38, 118);
+  color: white;
+  border-radius: 5px;
+  padding: 1rem;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+h1 > a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1rem;
+  font-size: 1rem;
 }
