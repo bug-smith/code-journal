@@ -10,6 +10,8 @@ const $newBTN = document.querySelector('.new-btn');
 
 // assigns image URL to produce the IMAGE
 
+// update for pull request
+
 $photoURL.addEventListener('input', function (event) {
   $photo.setAttribute('src', event.target.value);
 });
