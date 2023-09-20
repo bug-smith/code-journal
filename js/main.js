@@ -1,7 +1,12 @@
 const $photoURL = document.querySelector('#photo-url');
 const $photo = document.querySelector('.img');
 const $form = document.querySelector('form');
-
+const $a = document.querySelector('a');
+const $entryForm = document.querySelector("[data-view='entry-form']");
+const $entries = document.querySelector("[data-view='entries']");
+const $noEntries = document.querySelector('.p1');
+const $ul = document.querySelector('ul');
+const $newBTN = document.querySelector('.new-btn');
 
 // assigns image URL to produce the IMAGE
 
@@ -27,13 +32,21 @@ $form.addEventListener('submit', function (event) {
   data.nextEntryId++;
 
   $form.reset();
-});
 
+  const $newDOM = renderEntry(obj);
+
+  $ul.prepend($newDOM);
+
+  viewSwap('entries');
+
+  if (data.entries.length <= 0) {
+    toggleNoEntrires();
+  }
+});
 
 // assigns DOM tree
 
-function renderEntry (entry) {
-
+function renderEntry(entry) {
   // <li class='row'>
   // <div class='column-half'>
   //   <img src='$photoURL' alt="image"/>
@@ -44,69 +57,67 @@ function renderEntry (entry) {
   // </div>
   // </li>
 
-  const $li = document.createElement('li')
-  $li.setAttribute('class', 'row')
+  const $li = document.createElement('li');
+  $li.setAttribute('class', 'row');
 
-  const $divHalfOne = document.createElement('div')
-  $divHalfOne.setAttribute('class', 'column-half')
+  const $divHalfOne = document.createElement('div');
+  $divHalfOne.setAttribute('class', 'column-half');
 
-  const $img = document.createElement('img')
-  $img.setAttribute('src', entry.url)
+  const $img = document.createElement('img');
+  $img.setAttribute('src', entry.url);
 
-  const $divHalfTwo = document.createElement('div')
-  $divHalfTwo.setAttribute('class', 'column-half')
+  const $divHalfTwo = document.createElement('div');
+  $divHalfTwo.setAttribute('class', 'column-half');
 
-  const $h4 = document.createElement('h4')
-  $h4.textContent += entry.title
+  const $h4 = document.createElement('h4');
+  $h4.textContent += entry.title;
 
-  const $p = document.createElement('p')
-  $p.textContent += entry.notes
+  const $p = document.createElement('p');
+  $p.textContent += entry.notes;
 
-$li.append($divHalfOne, $divHalfTwo)
-$divHalfOne.append($img)
-$divHalfTwo.append($h4, $p)
+  $li.append($divHalfOne, $divHalfTwo);
+  $divHalfOne.append($img);
+  $divHalfTwo.append($h4, $p);
 
-
-return $li
-
+  return $li;
 }
 
 // pushes data into list
-const $ul = document.querySelector('ul')
 
-document.addEventListener('DOMContentLoaded', function (event){
-  for (let i = 0; i < data.entries.length; i++){
-  const $finalDOM = renderEntry(data.entries[i])
-  $ul.appendChild($finalDOM)
+document.addEventListener('DOMContentLoaded', function (event) {
+  for (let i = 0; i < data.entries.length; i++) {
+    const $finalDOM = renderEntry(data.entries[i]);
+    $ul.appendChild($finalDOM);
   }
-})
 
-const $noEntries = document.querySelector('.p1')
+  viewSwap(data.view);
 
-function toggleNoEntrires(){
-  if (data.entries.length > 0){
-$noEntries.setAttribute('class', 'no-entries p1')
-}
-}
+  if (data.entries.length > 0) {
+    toggleNoEntrires();
+  }
+});
 
-
-const $entryForm = document.querySelector("[data-view='entry-form']")
-const $entries = document.querySelector("[data-view='entries']")
-
-function viewSwap (string){
-  data.view = string
- if (string === "entries") {
-  $entryForm.setAttribute('class', 'hidden')
-  $entries.setAttribute('class', '')
- } else if (string === "entry-form"){
-  $entries.setAttribute('class', 'hidden')
-  $entryForm.setAttribute('class', '')
- }
+function toggleNoEntrires() {
+  if (data.entries.length <= 0) {
+    $noEntries.setAttribute('class', 'no-entries p1');
+  }
 }
 
+function viewSwap(string) {
+  data.view = string;
+  if (string === 'entries') {
+    $entryForm.setAttribute('class', 'hidden');
+    $entries.setAttribute('class', '');
+  } else if (string === 'entry-form') {
+    $entries.setAttribute('class', 'hidden');
+    $entryForm.setAttribute('class', '');
+  }
+}
 
-const $a = document.querySelector('a')
+$a.addEventListener('click', function (event) {
+  viewSwap('entries');
+});
 
-$a.addEventListener('click', function(event){
-  viewSwap('entries')
-})
+$newBTN.addEventListener('click', function (event) {
+  viewSwap('entry-form');
+});
