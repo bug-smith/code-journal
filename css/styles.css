@@ -64,7 +64,6 @@ ul {
 }
 
 .new-btn {
-  display: block;
   display: flex;
   width: 60px;
   height: 27px;

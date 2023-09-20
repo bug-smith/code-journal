@@ -39,9 +39,7 @@ $form.addEventListener('submit', function (event) {
 
   viewSwap('entries');
 
-  if (data.entries.length <= 0) {
-    toggleNoEntrires();
-  }
+  toggleNoEntrires();
 });
 
 // assigns DOM tree
@@ -65,6 +63,7 @@ function renderEntry(entry) {
 
   const $img = document.createElement('img');
   $img.setAttribute('src', entry.url);
+  $img.setAttribute('alt', 'image');
 
   const $divHalfTwo = document.createElement('div');
   $divHalfTwo.setAttribute('class', 'column-half');
@@ -92,14 +91,14 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
   viewSwap(data.view);
 
-  if (data.entries.length > 0) {
-    toggleNoEntrires();
-  }
+  toggleNoEntrires();
 });
 
 function toggleNoEntrires() {
   if (data.entries.length <= 0) {
     $noEntries.setAttribute('class', 'no-entries p1');
+  } else {
+    $noEntries.setAttribute('class', 'no-entries hidden p1');
   }
 }
 
