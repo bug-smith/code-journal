@@ -23,6 +23,7 @@ $photoURL.addEventListener('input', function (event) {
 // assigns entry to new obj stored in data
 
 $form.addEventListener('submit', function (event) {
+  event.preventDefault();
   const obj = {
     title: $form.elements.title.value,
     url: $form.elements.photourl.value,
@@ -31,33 +32,35 @@ $form.addEventListener('submit', function (event) {
   };
 
   if (data.editing === null) {
-    event.preventDefault();
-
     data.entries.unshift(obj);
 
-    $photo.setAttribute('src', 'images/placeholder-image-square.jpg');
-
     data.nextEntryId++;
-
-    $form.reset();
 
     const $newDOM = renderEntry(obj);
 
     $ul.prepend($newDOM);
-
-    viewSwap('entries');
-
-    toggleNoEntrires();
   } else if (data.editing !== null) {
     obj.entryId = data.editing.entryId;
 
     for (let i = 0; i < data.entries.length; i++) {
-      if (data.entries[i].entryId === data.editing[i].entryId) {
-        data.entries[i] = data.editing[i];
+      if (data.entries[i].entryId === data.editing.entryId) {
+        data.entries[i] = obj;
       }
     }
-    renderEntry(obj);
+
+    const $liNode = document
+      .querySelectorAll('li')
+      .getAttribute('data-entry-id');
+    for (let i = 0; i < $liNode.length; i++) {
+      if ($liNode === data.editing.nextEntryId) {
+        $liNode.replaceWith(renderEntry(obj));
+      }
+    }
   }
+  $photo.setAttribute('src', 'images/placeholder-image-square.jpg');
+  viewSwap('entries');
+  toggleNoEntrires();
+  $form.reset();
 });
 
 // assigns DOM tree
