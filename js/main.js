@@ -24,6 +24,7 @@ $photoURL.addEventListener('input', function (event) {
 
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
+
   const obj = {
     title: $form.elements.title.value,
     url: $form.elements.photourl.value,
@@ -48,15 +49,18 @@ $form.addEventListener('submit', function (event) {
       }
     }
 
-    const $liNode = document
-      .querySelectorAll('li')
-      .getAttribute('data-entry-id');
+    const $liNode = document.querySelectorAll('li');
+
     for (let i = 0; i < $liNode.length; i++) {
+      $liNode[i].getAttribute('data-entry-id');
       if ($liNode === data.editing.nextEntryId) {
         $liNode.replaceWith(renderEntry(obj));
       }
     }
+    $h2.textContent = 'New Entry';
+    data.editing = null;
   }
+
   $photo.setAttribute('src', 'images/placeholder-image-square.jpg');
   viewSwap('entries');
   toggleNoEntrires();
