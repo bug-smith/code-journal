@@ -12,6 +12,11 @@ const $titleInput = document.querySelector('#title');
 const $photoUrlLabel = document.querySelector('#photo-url');
 const $notes = document.querySelector('#notes');
 const $h2 = document.querySelector('h2');
+const $modalBTN = document.querySelector('#modal-btn');
+const $saveBTNDIV = document.querySelector('#div-save-btn');
+const $containerTwo = document.querySelector('#r5');
+const $cancel = document.querySelector('#cancel');
+const $confirm = document.querySelector('#confirm');
 // assigns image URL to produce the IMAGE
 
 // update for pull request
@@ -140,6 +145,7 @@ function viewSwap(string) {
   } else if (string === 'entry-form') {
     $entries.setAttribute('class', 'hidden');
     $entryForm.setAttribute('class', '');
+    $saveBTNDIV.setAttribute('class', 'column-full end');
   }
 }
 
@@ -169,5 +175,29 @@ $ul.addEventListener('click', function (event) {
     $photoUrlLabel.setAttribute('value', data.editing.url);
     $notes.textContent = data.editing.notes;
     $h2.textContent = 'Edit Entry';
+    $modalBTN.setAttribute('class', '');
+    $saveBTNDIV.setAttribute('class', 'column-full space');
+  }
+});
+
+$modalBTN.addEventListener('click', function (event) {
+  $containerTwo.setAttribute('class', 'container2');
+});
+
+$cancel.addEventListener('click', function (event) {
+  $containerTwo.setAttribute('class', 'container2 hidden');
+});
+
+$confirm.addEventListener('click', function (event) {
+  const $li = document.querySelector('li');
+
+  for (let i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryId === data.editing.entryId) {
+      data.entries.splice(i, 1);
+      $ul.removeChild($li);
+      toggleNoEntrires();
+      $containerTwo.setAttribute('class', 'container2 hidden');
+      viewSwap('entries');
+    }
   }
 });
