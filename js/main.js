@@ -57,9 +57,9 @@ $form.addEventListener('submit', function (event) {
     const $liNode = document.querySelectorAll('li');
 
     for (let i = 0; i < $liNode.length; i++) {
-      const $liGetAtt = $liNode[i].getAttribute('data-entry-id');
-      if ($liGetAtt === data.editing.nextEntryId) {
-        $liNode.replaceWith(renderEntry(obj));
+      const $liGetAtt = Number($liNode[i].getAttribute('data-entry-id'));
+      if ($liGetAtt === data.editing.entryId) {
+        $liNode[i].replaceWith(renderEntry(obj));
       }
     }
     $h2.textContent = 'New Entry';
@@ -198,6 +198,9 @@ $confirm.addEventListener('click', function (event) {
       toggleNoEntrires();
       $containerTwo.setAttribute('class', 'container2 hidden');
       viewSwap('entries');
+      data.editing = null;
+      $form.reset();
+      $h2.textContent = 'New Entry';
     }
   }
 });
