@@ -154,20 +154,20 @@ $newBTN.addEventListener('click', function (event) {
 $ul.addEventListener('click', function (event) {
   if (event.target.closest('i')) {
     viewSwap('entry-form');
-  }
 
-  const $number = Number(
-    event.target.closest('li').getAttribute('data-entry-id')
-  );
+    const $number = Number(
+      event.target.closest('li').getAttribute('data-entry-id')
+    );
 
-  for (let i = 0; i < data.entries.length; i++) {
-    if (data.entries[i].entryId === $number) {
-      data.editing = data.entries[i];
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === $number) {
+        data.editing = data.entries[i];
+      }
     }
+    $img.setAttribute('src', data.editing.url);
+    $titleInput.setAttribute('value', data.editing.title);
+    $photoUrlLabel.setAttribute('value', data.editing.url);
+    $notes.textContent = data.editing.notes;
+    $h2.textContent = 'Edit Entry';
   }
-  $img.setAttribute('src', data.editing.url);
-  $titleInput.setAttribute('value', data.editing.title);
-  $photoUrlLabel.setAttribute('value', data.editing.url);
-  $notes.textContent = data.editing.notes;
-  $h2.textContent = 'Edit Entry';
 });
