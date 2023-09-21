@@ -152,7 +152,7 @@ $newBTN.addEventListener('click', function (event) {
 });
 
 $ul.addEventListener('click', function (event) {
-  if (event.target.closest('i')) {
+  if (event.target.tagName === 'I') {
     viewSwap('entry-form');
 
     const $number = Number(
