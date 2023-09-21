@@ -52,8 +52,8 @@ $form.addEventListener('submit', function (event) {
     const $liNode = document.querySelectorAll('li');
 
     for (let i = 0; i < $liNode.length; i++) {
-      $liNode[i].getAttribute('data-entry-id');
-      if ($liNode === data.editing.nextEntryId) {
+      const $liGetAtt = $liNode[i].getAttribute('data-entry-id');
+      if ($liGetAtt === data.editing.nextEntryId) {
         $liNode.replaceWith(renderEntry(obj));
       }
     }
